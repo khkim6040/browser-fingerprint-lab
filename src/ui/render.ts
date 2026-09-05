@@ -92,5 +92,5 @@ export function renderHero(root: HTMLElement, sections: Section[], elapsedMs: nu
   const exposed = rows.filter((r) => r.supported).length;
   root.querySelector<HTMLElement>(".note")!.textContent =
     `${rows.length} signals read in ${(elapsedMs / 1000).toFixed(1)} s: ${exposed} exposed, ` +
-    `${rows.length - exposed} withheld by this browser or never available to any page. Nothing was stored or sent.`;
+    `${rows.length - exposed} withheld by this browser or never available to any page. Nothing was stored; nothing collected was sent.`;
 }
