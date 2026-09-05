@@ -11,6 +11,7 @@ import { collectWebgpu } from "./collectors/webgpu";
 import { collectRendering } from "./collectors/rendering";
 import { collectAudio } from "./collectors/audio";
 import { collectMedia } from "./collectors/media";
+import { collectNetwork } from "./collectors/network";
 import { collectFeatures } from "./collectors/features";
 import { render } from "./ui/render";
 import { mountLab } from "./ui/lab";
@@ -27,6 +28,7 @@ const COLLECTORS = [
   ["Rendering", collectRendering],
   ["Audio", collectAudio],
   ["Media", collectMedia],
+  ["Network", collectNetwork],
   ["Browser APIs", collectFeatures],
 ] as const;
 

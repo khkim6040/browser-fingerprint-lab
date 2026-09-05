@@ -23,7 +23,7 @@ interface NavigatorUAData {
 
 interface Navigator {
   readonly userAgentData?: NavigatorUAData;
-  /** Coarsened by the browser to a power of two (16 seen on a 48 GB machine). */
+  /** Coarsened by the browser to a power of two (an M4 Pro reported 16). */
   readonly deviceMemory?: number;
 }
 
@@ -59,6 +59,19 @@ interface Performance {
     readonly totalJSHeapSize: number;
     readonly usedJSHeapSize: number;
   };
+}
+
+/** Network Information API: Chromium only, values rounded and noised on purpose. */
+interface LabNetworkInformation {
+  readonly effectiveType?: string;
+  readonly downlink?: number;
+  readonly rtt?: number;
+  readonly saveData?: boolean;
+  readonly type?: string;
+}
+
+interface Navigator {
+  readonly connection?: LabNetworkInformation;
 }
 
 /** package.json version, injected by vite `define` (stamped into JSON exports). */

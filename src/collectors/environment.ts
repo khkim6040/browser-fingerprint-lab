@@ -65,7 +65,6 @@ export async function collectEnvironment(): Promise<Section> {
       result("Do Not Track", navigator.doNotTrack),
       result("PDF viewer enabled", navigator.pdfViewerEnabled),
       result("Webdriver", navigator.webdriver),
-      result("Online", navigator.onLine),
     ],
   };
 }
