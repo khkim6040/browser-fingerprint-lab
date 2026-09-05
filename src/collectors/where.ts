@@ -19,8 +19,10 @@ async function ask(): Promise<{ seen: Seen; edge?: string } | undefined> {
   try {
     const res = await fetch("/api/where", { signal: AbortSignal.timeout(3000) });
     if (!res.ok || !res.headers.get("content-type")?.includes("json")) return undefined;
+    const seen = await res.json();
+    if (typeof seen !== "object" || seen === null) return undefined;
     // "icn1::iad1::…" — the first token is the edge that took the request.
-    return { seen: await res.json(), edge: res.headers.get("x-vercel-id")?.split("::")[0] || undefined };
+    return { seen, edge: res.headers.get("x-vercel-id")?.split("::")[0] || undefined };
   } catch {
     return undefined;
   }
@@ -28,6 +30,8 @@ async function ask(): Promise<{ seen: Seen; edge?: string } | undefined> {
 
 export async function collectServer(): Promise<Section> {
   const answer = await ask();
+  const lat = Number(answer?.seen.latitude);
+  const lon = Number(answer?.seen.longitude);
   const results: CollectorResult[] = answer
     ? [
         result("IP address", answer.seen.ip),
@@ -36,7 +40,7 @@ export async function collectServer(): Promise<Section> {
         result("City", answer.seen.city, "COARSE"),
         result(
           "Coordinates",
-          answer.seen.latitude && answer.seen.longitude ? `${(+answer.seen.latitude).toFixed(2)}, ${(+answer.seen.longitude).toFixed(2)}` : undefined,
+          answer.seen.latitude && answer.seen.longitude && Number.isFinite(lat) && Number.isFinite(lon) ? `${lat.toFixed(2)}, ${lon.toFixed(2)}` : undefined,
           "COARSE",
         ),
         result("IP timezone", answer.seen.timezone, "COARSE"),
