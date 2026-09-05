@@ -132,7 +132,9 @@ button, .button {
   cursor: pointer;
 }
 button:hover, .button:hover { border-color: var(--accent); }
-.button input { display: none; }
+.button { position: relative; }
+/* Off-screen rather than display:none, so Tab reaches it and Enter opens the picker. */
+.button input { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
 
 .note.error { color: #e07f7f; }
 .badge.same { color: #7fd1b9; }
