@@ -1,4 +1,4 @@
-import { result, unavailable, type CollectorResult, type Section } from "../types";
+import { result, unavailable, type CollectorResult, type EvidenceType, type Section } from "../types";
 
 const NAMES = ["IP address", "Country", "Region", "City", "Coordinates", "IP timezone", "Edge region"];
 const NOTE =
@@ -28,23 +28,27 @@ async function ask(): Promise<{ seen: Seen; edge?: string } | undefined> {
   }
 }
 
+/** A missing/empty value here means Vercel's own lookup had nothing to say — not that the browser withheld it. */
+const row = (name: string, v: string | undefined, type?: EvidenceType): CollectorResult =>
+  v ? result(name, v, type) : unavailable(name, "no answer in Vercel's lookup for this address");
+
 export async function collectServer(): Promise<Section> {
   const answer = await ask();
   const lat = Number(answer?.seen.latitude);
   const lon = Number(answer?.seen.longitude);
   const results: CollectorResult[] = answer
     ? [
-        result("IP address", answer.seen.ip),
-        result("Country", answer.seen.country, "COARSE"),
-        result("Region", answer.seen.region, "COARSE"),
-        result("City", answer.seen.city, "COARSE"),
-        result(
+        row("IP address", answer.seen.ip),
+        row("Country", answer.seen.country, "COARSE"),
+        row("Region", answer.seen.region, "COARSE"),
+        row("City", answer.seen.city, "COARSE"),
+        row(
           "Coordinates",
           answer.seen.latitude && answer.seen.longitude && Number.isFinite(lat) && Number.isFinite(lon) ? `${lat.toFixed(2)}, ${lon.toFixed(2)}` : undefined,
           "COARSE",
         ),
-        result("IP timezone", answer.seen.timezone, "COARSE"),
-        result("Edge region", answer.edge),
+        row("IP timezone", answer.seen.timezone, "COARSE"),
+        row("Edge region", answer.edge),
       ]
     : NAMES.map((n) => unavailable(n, "no server behind this build; deployed on Vercel it answers"));
   return { title: "Server", note: NOTE, results };
