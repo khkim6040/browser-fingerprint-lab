@@ -150,34 +150,37 @@ export function deduce(sections: Section[]): Deduction[]  // RULES 순서대로,
 
 1. **Verdict** — Machine의 제품 목록과 Display의 패널 제품을 교집합해 한 문장.
    "Probably a Mac mini or a docked MacBook Pro 14 (M4 Pro, 24 GB+) on an external 1080p monitor, in Seoul, KR."
-   외장 모니터면 노트북 제품 앞에 "docked". Machine이 없으면 OS와 Display만으로.
+   외장 모니터면 노트북 제품 앞에 "docked". Machine 결론이 없으면 "a Windows machine"처럼 OS 이름을 쓴다(OS도 없으면 "a computer").
 2. **Machine**
    - `WebGL/Unmasked renderer` ~ `/Apple (M\d+)( Pro| Max| Ultra)?/` → 칩. `CPU/Logical processors`로 APPLE_CHIPS 조회.
      → "Apple M4 Pro, the 12-core variant — sold as MacBook Pro 14 or Mac mini". 표에 없으면
      "Apple M5 Pro — newer than this page's table".
-   - renderer가 `Apple GPU`이고 `Environment/OS`가 macOS → "an Apple Silicon Mac; Safari masks the chip and caps the core count at 8".
+   - renderer가 `Apple GPU`이고 `Environment/OS`가 macOS → "a Mac, most likely Apple Silicon; Safari masks the chip and caps the core count at 8".
    - `Environment/Platform (legacy)`가 MacIntel이고 `Input/Touch points` > 0 → "an iPad asking to be treated as a Mac".
    - `Environment/Mobile`이 true 또는 `Form factors`에 Mobile/Tablet → `Environment/Model`이 있으면
      "Android phone, model SM-S928B", UA에 iPhone/iPad면 "iPhone; Safari names no model".
-   - 그 외: renderer에서 모델명 추출(`ANGLE (vendor, MODEL (0x…) Direct3D11 …, D3D11)` → MODEL; Mesa 접두/괄호 제거),
-     GPU_CLASSES 첫 매치 → "Windows: a laptop with a discrete GPU (NVIDIA GeForce RTX 4070 Laptop GPU)". 매치 없으면 "PC with <모델명>".
+   - 그 외: renderer에서 모델명 추출(`ANGLE (vendor, MODEL (0x…) Direct3D11 …, D3D11)` → MODEL; Mesa 접두/괄호 제거).
+     GPU_CLASSES 매치가 `software`(SwiftShader 등)면 macOS를 포함해 OS와 무관하게 즉시 "macOS: software rendering: a VM, remote desktop, or headless browser (모델명)"처럼 반환.
+     그 외 macOS는 모델명에 Intel/AMD/Radeon이 있을 때만 "an Intel-era Mac with 모델명", 없으면 "a Mac with 모델명".
+     그 외 OS는 첫 매치 → "Windows: a laptop with a discrete GPU (NVIDIA GeForce RTX 4070 Laptop GPU)". 매치 없으면 "PC with <모델명>".
    - evidence: WebGL/Unmasked renderer, CPU/Logical processors, Environment/OS (+ 쓴 것만).
 3. **Memory** — `Memory/Reported device memory` 버킷(GB)과 Machine이 찾은 minRam 중 큰 값.
    "24 GB or more — Chrome only admits ≥16 GB, but this chip never ships with less than 24 GB". 표 매치가 없으면
    버킷만으로 "16 GB or more", 버킷도 없으면(Firefox/Safari) minRam만으로 "24 GB or more — this chip ships with no less",
    둘 다 없으면 규칙이 빠진다.
 4. **Display** — `Display/Resolution`, `Device pixel ratio`, `Color gamut`. macOS: DPR 1 또는 srgb →
-   "an external non-Apple monitor, 1920×1080 at native 1×"; DPR 2 + p3 → PANELS 조회 "the built-in MacBook Pro 14 display";
+   "an external non-Apple monitor, 1920×1080 at native 1×"; DPR 2 + p3 → PANELS 조회 "the MacBook Pro 14 panel, 1512×982 at 2× — Retina, P3";
    표에 없으면 "a Retina P3 display at a custom scaling". Windows/Linux: DPR ≠ 1이면 "a 2560×1440 screen scaled at 150%", 아니면 "a 1920×1080 screen at 100%".
-5. **Desk** — `Display/Available`, `Resolution`, `Window outer size`. macOS: 높이 차 ≤ 40 → "Dock hidden or on the side",
+5. **Desk** — `Display/Available`, `Resolution`, `Window outer size`. macOS: 높이 차 ≤ 40 → "no Dock on this screen: hidden, or on another display",
    > 40 → "Dock at the bottom"; 너비 차 > 0 → "Dock on the left or right". 창 바깥 크기 ≥ 사용 가능 영역 →
    "the browser fills the screen", 아니면 "windowed, 1200×800 of 1920×1050".
 6. **Where** — `Server/City`, `Server/Country`, `Server/IP timezone` vs `Environment/Timezone`. 같으면
-   "Seoul, KR by IP address; the browser clock agrees (Asia/Seoul), so no sign of a VPN or proxy". 다르면
+   "Seoul, South Korea by IP address; the browser clock agrees (Asia/Seoul), so no sign of a VPN or proxy". 다르면
    "the clock says Asia/Seoul but the IP sits in America/Los_Angeles — VPN, proxy, or travelling".
    Server가 없으면 "IP location unavailable here; the clock says Asia/Seoul".
 7. **Languages** — `Environment/Languages`를 `Intl.DisplayNames`(node에도 있음)로 이름화, 기본 언어 중복 제거.
-   "Browser in English (US); also reads Korean and Japanese". 첫 언어의 지역이 IP 국가와 다르면 " — an English UI in Korea".
+   "browser in American English; also reads Korean and Japanese". 첫 언어의 지역이 IP 국가와 다르면
+   "browser in American English; also reads Korean and Japanese — an English UI in South Korea"처럼 지역 불일치 문구가 뒤에 붙는다.
 8. **Connection** — `Network/Time to first byte`(ms)와 `Server/Edge region`. < 20 → "15 ms to Vercel's icn1 edge: same metro area",
    < 60 → "same region", 그 이상 → "far from the nearest edge, or a slow link". Server 없으면 TTFB만.
 
