@@ -4,3 +4,4 @@ HANDOFF.md
 roadmap.md
 .vercel
 .env*
+.playwright-mcp
