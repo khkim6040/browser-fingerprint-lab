@@ -4,6 +4,7 @@ import { collectEnvironment } from "./collectors/environment";
 import { collectCpu } from "./collectors/cpu";
 import { collectMemory } from "./collectors/memory";
 import { collectDisplay } from "./collectors/display";
+import { collectInput } from "./collectors/input";
 import { collectWebgl } from "./collectors/webgl";
 import { collectWebgpu } from "./collectors/webgpu";
 import { collectRendering } from "./collectors/rendering";
@@ -17,6 +18,7 @@ const COLLECTORS = [
   ["CPU", collectCpu],
   ["Memory", collectMemory],
   ["Display", collectDisplay],
+  ["Input", collectInput],
   ["WebGL", collectWebgl],
   ["WebGPU", collectWebgpu],
   ["Rendering", collectRendering],

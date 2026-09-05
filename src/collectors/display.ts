@@ -6,11 +6,11 @@ import { result, type EvidenceType, type Section } from "../types";
  * Values must be ordered widest-first for the graded features (`color-gamut`,
  * `dynamic-range`), where a wider display also matches the narrower keywords.
  */
-function mq(feature: string, values: string[]): string | undefined {
+export function mq(feature: string, values: string[]): string | undefined {
   return values.find((v) => matchMedia(`(${feature}: ${v})`).matches);
 }
 
-function mqRow(
+export function mqRow(
   name: string,
   feature: string,
   values: string[],
@@ -35,10 +35,6 @@ export function collectDisplay(): Section {
       // Hardware described in buckets rather than measured.
       mqRow("Color gamut", "color-gamut", ["rec2020", "p3", "srgb"], "COARSE"),
       mqRow("Dynamic range", "dynamic-range", ["high", "standard"], "COARSE"),
-      mqRow("Pointer", "pointer", ["fine", "coarse", "none"], "COARSE"),
-      mqRow("Any pointer", "any-pointer", ["fine", "coarse", "none"], "COARSE"),
-      mqRow("Hover", "hover", ["hover", "none"], "COARSE"),
-      mqRow("Any hover", "any-hover", ["hover", "none"], "COARSE"),
 
       // User and OS settings, reported exactly.
       mqRow("Color scheme", "prefers-color-scheme", ["dark", "light"], "DIRECT"),
