@@ -23,7 +23,7 @@ interface NavigatorUAData {
 
 interface Navigator {
   readonly userAgentData?: NavigatorUAData;
-  /** Coarsened by the browser: 0.25 | 0.5 | 1 | 2 | 4 | 8 */
+  /** Coarsened by the browser to a power of two (16 seen on a 48 GB machine). */
   readonly deviceMemory?: number;
 }
 
@@ -50,6 +50,15 @@ interface GPU {
 
 interface Navigator {
   readonly gpu?: GPU;
+}
+
+/** Chromium-only JS heap figures, quantised to blunt fingerprinting. */
+interface Performance {
+  readonly memory?: {
+    readonly jsHeapSizeLimit: number;
+    readonly totalJSHeapSize: number;
+    readonly usedJSHeapSize: number;
+  };
 }
 
 /** package.json version, injected by vite `define` (stamped into JSON exports). */
