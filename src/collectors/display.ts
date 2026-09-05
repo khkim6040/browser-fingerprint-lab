@@ -19,9 +19,29 @@ export function mqRow(
   return result(name, mq(feature, values), evidenceType);
 }
 
-export function collectDisplay(): Section {
+/** Median gap between animation frames; no API states the refresh rate. */
+function frameInterval(frames = 24): Promise<number | undefined> {
+  const stamps: number[] = [];
+  const sample = new Promise<void>((done) => {
+    const tick = (t: number) => {
+      if (stamps.push(t) > frames) done();
+      else requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }).then(() => {
+    const gaps = stamps.slice(2).map((t, i) => t - stamps[i + 1]).sort((a, b) => a - b);
+    return gaps[gaps.length >> 1];
+  });
+  // A background tab never gets a frame; give up rather than hang the page.
+  const timeout = new Promise<undefined>((done) => setTimeout(() => done(undefined), 2000));
+  return Promise.race([sample, timeout]);
+}
+
+export async function collectDisplay(): Promise<Section> {
+  const interval = await frameInterval();
   return {
     title: "Display",
+    note: "Refresh rate is inferred from animation-frame timing, so background tabs, power saving and variable-refresh displays all move it.",
     results: [
       result("Resolution", `${screen.width} x ${screen.height}`),
       result("Available", `${screen.availWidth} x ${screen.availHeight}`),
@@ -31,6 +51,8 @@ export function collectDisplay(): Section {
       result("Viewport", `${innerWidth} x ${innerHeight}`),
       result("Window outer size", `${outerWidth} x ${outerHeight}`),
       result("Orientation", screen.orientation?.type),
+      result("Frame interval", interval && `${interval.toFixed(2)} ms`, "INFERRED"),
+      result("Estimated refresh rate", interval && `~${Math.round(1000 / interval)} Hz`, "INFERRED"),
 
       // Hardware described in buckets rather than measured.
       mqRow("Color gamut", "color-gamut", ["rec2020", "p3", "srgb"], "COARSE"),
