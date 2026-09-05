@@ -40,6 +40,25 @@ const safari = mk({
 });
 assert.match(find(safari, "Machine"), /Safari masks/);
 
+// No WebGL context at all (hardware acceleration off, GPU blocklisted, hardened
+// profile): still "Safari masks…", but must not cite a row this export never had.
+const noWebgl: Section[] = [
+  ...mk({
+    "Environment/OS": "MacIntel",
+    "Environment/User agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15",
+    "CPU/Logical processors": 8,
+    "Input/Touch points": 0,
+  }),
+  { title: "WebGL", results: [{ name: "WebGL context", supported: false, evidenceType: "UNAVAILABLE" }] },
+];
+const noWebglKeys = new Set<string>(noWebgl.flatMap((s) => s.results.map((r) => `${s.title}/${r.name}`)));
+const noWebglDs = deduce(noWebgl);
+const machineNoWebgl = noWebglDs.find((d) => d.name === "Machine");
+assert.ok(machineNoWebgl, "no-WebGL case: no Machine deduction");
+assert.match(machineNoWebgl.value, /Safari masks/);
+assert.ok(!machineNoWebgl.evidence.includes("WebGL/Unmasked renderer"), "no-WebGL case: cites the absent WebGL/Unmasked renderer row");
+for (const d of noWebglDs) for (const k of d.evidence) assert.ok(noWebglKeys.has(k), `no-WebGL case: ${d.name} cites missing row ${k}`);
+
 // Windows laptop with a discrete GPU, HiDPI scaling.
 const win = mk({
   "Environment/OS": "Windows",

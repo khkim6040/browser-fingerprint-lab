@@ -259,7 +259,11 @@ const RULES: Rule[] = [machine, memory, display, desk, where, languages, connect
 
 export function deduce(sections: Section[]): Deduction[] {
   const rows = new Map<string, unknown>();
-  for (const s of sections) for (const r of s.results) if (r.supported) rows.set(`${s.title}/${r.name}`, r.value);
+  const allKeys = new Set<string>();
+  for (const s of sections) for (const r of s.results) {
+    allKeys.add(`${s.title}/${r.name}`);
+    if (r.supported) rows.set(`${s.title}/${r.name}`, r.value);
+  }
   const get: Get = (key) => rows.get(key);
   const facts: Facts = {};
   const out: Deduction[] = [];
@@ -268,5 +272,9 @@ export function deduce(sections: Section[]): Deduction[] {
     if (d) out.push(d);
   }
   const v = verdict(facts, out);
-  return v ? [v, ...out] : out;
+  const all = v ? [v, ...out] : out;
+  // A rule's `ev` is built unconditionally before it knows which branch it will
+  // return from, so it can name a row (e.g. "WebGL/Unmasked renderer") that this
+  // export never had at all. Drop those here, once, for every deduction including Verdict.
+  return all.map((d) => ({ ...d, evidence: d.evidence.filter((k) => allKeys.has(k)) }));
 }
