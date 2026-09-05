@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { result, guard } from "./types.ts";
+import { result, guard, unavailable } from "./types.ts";
 
 assert.deepEqual(result("Cores", 12), {
   name: "Cores",
@@ -32,5 +32,13 @@ assert.equal(thrown.results[0].error, "nope");
 
 const ok = await guard("Fine", () => ({ title: "Fine", results: [] }));
 assert.deepEqual(ok, { title: "Fine", results: [] });
+
+// unavailable(): a value no page can read, by design — rendered with the reason, not "not exposed".
+assert.deepEqual(unavailable("CPU serial"), {
+  name: "CPU serial",
+  supported: false,
+  evidenceType: "UNAVAILABLE",
+  error: "never exposed to web pages",
+});
 
 console.log("types: ok");

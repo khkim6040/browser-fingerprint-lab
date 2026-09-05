@@ -55,3 +55,11 @@ export async function guard(title: string, fn: Collector): Promise<Section> {
     };
   }
 }
+
+/**
+ * A value no web page can read, by browser design (CPU serial, disk model…).
+ * Shown as UNAVAILABLE with the reason, so the row reads as a defence, not a gap.
+ */
+export function unavailable(name: string, reason = "never exposed to web pages"): CollectorResult {
+  return { name, supported: false, evidenceType: "UNAVAILABLE", error: reason };
+}
