@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning src/types.test.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning src/fingerprint/hash.test.ts"
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning src/types.test.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning src/fingerprint/hash.test.ts && node --experimental-strip-types --disable-warning=ExperimentalWarning src/lab/diff.test.ts"
   },
   "devDependencies": {
     "typescript": "^5.7.0",
