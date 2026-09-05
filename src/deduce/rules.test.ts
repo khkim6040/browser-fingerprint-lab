@@ -107,6 +107,9 @@ assert.match(find(mk({ "Environment/Timezone": "Asia/Seoul", "Server/Country": "
 // Language UI vs IP country.
 assert.match(find(mk({ "Environment/Languages": ["en-US", "ko-KR", "ko"], "Server/Country": "KR" }), "Languages"), /browser in American English; also reads Korean — an English UI in South Korea/);
 
+// "zh-Hans-CN": the script subtag ("Hans") must not be mistaken for the region.
+assert.doesNotMatch(find(mk({ "Environment/Languages": ["zh-Hans-CN"], "Server/Country": "CN" }), "Languages"), /UI in/);
+
 // Renderer string cleanup and OS detection.
 assert.equal(gpuModel("ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x000028A0) Direct3D11 vs_5_0 ps_5_0, D3D11)"), "NVIDIA GeForce RTX 4070 Laptop GPU");
 assert.equal(gpuModel("Mesa Intel(R) UHD Graphics 620 (KBL GT2)"), "Intel(R) UHD Graphics 620");

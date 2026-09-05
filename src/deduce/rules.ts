@@ -223,7 +223,13 @@ const languages: Rule = (get) => {
   let value = `browser in ${displayName("language", first)}`;
   if (others.length) value += `; also reads ${list(others, "and")}`;
   const ev = ["Environment/Languages"];
-  const region = first.split("-")[1];
+  const region = (() => {
+    try {
+      return new Intl.Locale(first).region;
+    } catch {
+      return undefined;
+    }
+  })();
   const country = str(get, "Server/Country");
   if (region && country && region.toUpperCase() !== country.toUpperCase()) {
     value += ` — ${an(`${displayName("language", base(first))} UI`)} in ${displayName("region", country)}`;
