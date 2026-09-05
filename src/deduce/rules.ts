@@ -258,7 +258,7 @@ function verdict(f: Facts, ds: Deduction[]): Deduction | undefined {
     what = list(products.map((p) => (f.external && /MacBook/.test(p) ? `a docked ${p}` : `a ${p}`)));
     what += ` (${f.chip}${f.ramGb ? `, ${f.ramGb} GB+` : ""})`;
   } else {
-    what = machine?.value ?? "a computer";
+    what = machine ? machine.value : f.os ? `a ${f.os} machine` : "a computer";
   }
   const bits = [what];
   if (f.display) bits.push(`on ${f.display}`);

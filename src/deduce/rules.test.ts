@@ -96,6 +96,10 @@ assert.doesNotMatch(find(macParavirtual, "Machine"), /Intel-era/);
 const macIntel = mk({ "Environment/OS": "macOS", "WebGL/Unmasked renderer": "ANGLE (Intel, Intel(R) Iris(TM) Plus Graphics 640, OpenGL 4.1)" });
 assert.match(find(macIntel, "Machine"), /an Intel-era Mac with Intel\(R\) Iris\(TM\) Plus Graphics 640/);
 
+// No renderer at all, so no Machine deduction: Verdict falls back to the OS name, not "a computer".
+const noRenderer = mk({ "Environment/OS": "Windows", "Display/Resolution": "1920 x 1080", "Display/Device pixel ratio": 1 });
+assert.match(find(noRenderer, "Verdict"), /^Probably a Windows machine, on a 1920×1080 screen\.$/);
+
 // IP timezone vs browser clock: mismatch is a VPN tell, same offset is not.
 const vpn = mk({ "Environment/Timezone": "Asia/Seoul", "Server/Country": "US", "Server/City": "Los Angeles", "Server/IP timezone": "America/Los_Angeles" });
 assert.match(find(vpn, "Where"), /VPN, proxy, or travelling/);
