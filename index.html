@@ -7,17 +7,48 @@
   </head>
   <body>
     <main id="app">
-      <h1>Browser Fingerprint Lab</h1>
-      <p class="lede">You granted this page <strong>ZERO permissions.</strong></p>
-      <p class="lede">Yet your browser revealed:</p>
+      <header>
+        <h1>Browser Fingerprint Lab</h1>
+        <p class="lede">You granted this page <strong>ZERO permissions.</strong></p>
+        <ul class="denied" aria-label="Permissions this page never asked for">
+          <li>No camera</li>
+          <li>No microphone</li>
+          <li>No location</li>
+          <li>No Bluetooth</li>
+        </ul>
+        <p class="lede">Yet your browser revealed:</p>
+      </header>
       <section id="hero" aria-live="polite">
         <h2>Your browser fingerprint</h2>
         <p class="print pending">computing&hellip;</p>
         <p class="note">Reading what the browser hands out without asking&hellip;</p>
       </section>
       <div id="lab-toolbar"></div>
+      <details id="experiment" open>
+        <summary>Can it recognise you again?</summary>
+        <ol>
+          <li>Reload the page.</li>
+          <li>Quit the browser and open it again.</li>
+          <li>Clear cookies and site data.</li>
+          <li>Open this page in a private or incognito window.</li>
+          <li>Open it in another browser.</li>
+        </ol>
+        <p>Nothing is stored between visits, so the only way the fingerprint can come back is to be computed again from the same device. Export before, import after: the Stability Lab lists every signal that moved.</p>
+      </details>
       <div id="lab"></div>
       <div id="sections">Analyzing your browser&hellip;</div>
+      <section id="legend">
+        <h2>How to read the badges</h2>
+        <div class="row"><span class="badge direct">DIRECT</span><span class="value">The browser reports the real value as-is.</span></div>
+        <div class="row"><span class="badge coarse">COARSE</span><span class="value">Deliberately bucketed or rounded to blunt fingerprinting.</span></div>
+        <div class="row"><span class="badge inferred">INFERRED</span><span class="value">Measured or derived by this page, not read from an API.</span></div>
+        <div class="row"><span class="badge unavailable">UNAVAILABLE</span><span class="value">Withheld by this browser, or never available to any page. Half the exhibit.</span></div>
+      </section>
+      <footer>
+        <p>A website does not need your camera, microphone or location to tell your machine apart from the next one. Dozens of small, permission-free signals &mdash; the GPU's name, how its shaders round, which codecs decode in hardware, how the audio pipeline compresses a tone &mdash; add up to a description specific enough to recognise a device again.</p>
+        <p>Never read by this page: files, browsing history, passwords, clipboard, camera or microphone input, precise location, MAC address, hardware serials.</p>
+        <p><a href="https://github.com/khkim6040/browser-fingerprint-lab">Source on GitHub</a>. Everything runs in your browser; nothing is sent anywhere.</p>
+      </footer>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
