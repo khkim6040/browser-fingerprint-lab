@@ -6,11 +6,12 @@
 
 An educational demo of what a web page learns about your device **without ever
 showing a permission prompt**. No dialog to accept, no button to click — the
-page just reads what the browser hands out for free, folds about 140 of those
-signals into one composite fingerprint, reads them like a detective (which Mac,
-which monitor, which city), and invites you to test whether it can recognise
-you again after a reload, a restart, incognito, or another browser. Every
-section header counts how many of its signals this browser exposes.
+page just reads what the browser hands out for free, reads about 140 of those
+signals and folds the stable ones into one composite fingerprint, reads them
+like a detective (which Mac, which monitor, which city), and invites you to
+test whether it can recognise you again after a reload, a restart, incognito,
+or another browser. Every section header counts how many of its signals this
+browser exposes.
 
 ## Principles
 
@@ -62,6 +63,8 @@ The deductions are plain rules in `src/deduce/rules.ts` over data tables in
 `src/deduce/tables.ts` (Apple chips → products, built-in panels, GPU classes).
 Every real-device export dropped into `src/deduce/fixtures/` with a few expected
 substrings becomes a test case, so the tables get sharper as exports come in.
+Commit an export only after deleting the Server section's IP address and
+Coordinates rows; no rule reads them.
 
 ## Stability Lab
 
