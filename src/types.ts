@@ -6,6 +6,8 @@ export interface CollectorResult<T = unknown> {
   evidenceType: EvidenceType;
   value?: T;
   error?: string;
+  /** Rows this value was inferred from, as "Section/Signal" keys (Deductions only). */
+  evidence?: string[];
 }
 
 export interface Section {

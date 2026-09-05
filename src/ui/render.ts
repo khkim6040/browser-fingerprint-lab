@@ -21,6 +21,13 @@ function row(r: CollectorResult): HTMLElement {
     ? format(r.value)
     : (r.error ?? "not exposed by this browser");
 
+  if (r.evidence?.length) {
+    const ev = document.createElement("span");
+    ev.className = "evidence";
+    ev.textContent = `evidence: ${r.evidence.join(", ")}`;
+    value.append(ev);
+  }
+
   const badge = document.createElement("span");
   badge.className = `badge ${r.evidenceType.toLowerCase()}`;
   badge.textContent = r.evidenceType;

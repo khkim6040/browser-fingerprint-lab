@@ -83,6 +83,7 @@ h2 .count { font-weight: 400; letter-spacing: 0.04em; text-transform: none; }
 .name { color: var(--dim); }
 .value { overflow-wrap: anywhere; }
 .value.absent { color: #4d5761; font-style: italic; }
+.evidence { display: block; margin-top: 0.15rem; color: var(--dim); font-size: 0.75rem; }
 
 .badge {
   font-size: 0.625rem;
