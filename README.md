@@ -32,10 +32,10 @@ surface, which is why no user-agent string parsing is used to paper over gaps.
 | Section | Examples |
 | --- | --- |
 | Environment | UA Client Hints (OS, version, architecture, model), locale, timezone, `webdriver` |
-| CPU | `hardwareConcurrency` |
+| CPU | `hardwareConcurrency`, a seven-workload benchmark (integer, float, sort, hash, JSON, matrix, hand-assembled wasm), Web Worker scaling → effective parallelism, and the CPU facts no page can read |
 | Memory | `deviceMemory` (bucketed, not your installed RAM), Chromium's quantised JS heap figures, and the RAM facts no page can read |
 | Storage | `navigator.storage.estimate()` usage and quota (a slice of free disk), and the disk facts no page can read |
-| Display | Screen and viewport geometry, DPR, plus media queries: colour gamut, dynamic range, and user preferences (colour scheme, contrast, reduced motion, forced colours) |
+| Display | Screen and viewport geometry, DPR, refresh rate estimated from animation-frame timing, plus media queries: colour gamut, dynamic range, and user preferences (colour scheme, contrast, reduced motion, forced colours) |
 | Input | `maxTouchPoints`, pointer/hover capability classes, and a guess at the kind of machine they add up to |
 | WebGL | Vendor and renderer, the unmasked GPU string via `WEBGL_debug_renderer_info`, driver limits, shader precision, extension list |
 | WebGPU | Adapter vendor and architecture, supported features, key limits |
@@ -62,7 +62,7 @@ is stored between visits; the file is the only memory.
 ```sh
 npm install
 npm run dev     # dev server
-npm test        # self-checks for result/guard, sha256 and the diff
+npm test        # self-checks for result/guard, sha256, the diff, and the benchmark workloads
 npm run build   # tsc --noEmit && vite build
 ```
 
