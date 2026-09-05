@@ -36,6 +36,9 @@ export function collectWebgl(): Section {
 
   const section: Section = {
     title: "WebGL",
+    // Firefox answers the unmasked query with a generalised model
+    // ("Apple M1, or similar"), so an unmasked value is not always exact.
+    note: "Unmasked vendor and renderer come from a debug extension a browser may remove, or answer with a generalised model name rather than the real one.",
     results: [
       result("API version", api),
 
