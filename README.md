@@ -6,15 +6,19 @@
 
 An educational demo of what a web page learns about your device **without ever
 showing a permission prompt**. No dialog to accept, no button to click — the
-page just reads what the browser hands out for free, folds about 130 of those
-signals into one composite fingerprint, and invites you to test whether it can
-recognise you again after a reload, a restart, incognito, or another browser.
-Every section header counts how many of its signals this browser exposes.
+page just reads what the browser hands out for free, folds about 140 of those
+signals into one composite fingerprint, reads them like a detective (which Mac,
+which monitor, which city), and invites you to test whether it can recognise
+you again after a reload, a restart, incognito, or another browser. Every
+section header counts how many of its signals this browser exposes.
 
 ## Principles
 
-- **Frontend only.** Nothing is sent anywhere. There is no server, no analytics,
-  no cookie, no persistent storage. Reload and the page starts from nothing.
+- **Nothing you collected leaves the browser.** No analytics, no cookie, no
+  persistent storage; reload and the page starts from nothing. The one request to
+  this site's own server (`/api/where`) carries no data: it asks what the server
+  already saw in the request — the address the reply had to reach — and returns
+  Vercel's city-level lookup of it. Nothing is stored there either.
 - **No permission-gated API, ever.** Geolocation, camera, microphone, Bluetooth,
   USB, HID, Serial, `getScreenDetails()` and Local Font Access are all excluded
   on purpose. The moment a dialog appears, the point is lost.
@@ -35,6 +39,7 @@ surface, which is why no user-agent string parsing is used to paper over gaps.
 | Section | Examples |
 | --- | --- |
 | Fingerprint | One SHA-256 per category (Hardware, Rendering, Audio, Environment) over the stable signals below, and a composite over those four. Benchmarks, viewport, heap and other per-load noise are left out |
+| Deductions | What a detective concludes from the rows below, each with the rows it leaned on: chip and product line from the WebGL renderer and core count, a memory floor, built-in versus external display, Dock and window state, IP city versus the browser clock (a VPN tell), languages, distance to the CDN edge. Rules over rows, not machine learning |
 | Environment | UA Client Hints (OS, version, architecture, model), locale, timezone, `webdriver` |
 | CPU | `hardwareConcurrency`, a seven-workload benchmark (integer, float, sort, hash, JSON, matrix, hand-assembled wasm), Web Worker scaling → effective parallelism, and the CPU facts no page can read |
 | Memory | `deviceMemory` (bucketed, not your installed RAM), Chromium's quantised JS heap figures, and the RAM facts no page can read |
@@ -47,10 +52,16 @@ surface, which is why no user-agent string parsing is used to paper over gaps.
 | Audio | `AudioContext` sample rate, base/output latency and state (read, never started), plus SHA-256 of a 10 kHz tone rendered through a compressor in `OfflineAudioContext` — no microphone, no sound |
 | Media | `MediaCapabilities.decodingInfo()` for H.264 / H.265 / VP9 / AV1 at 4K60 and AAC / Opus: supported, smooth, power-efficient (a hardware-decoder hint) |
 | Network | `navigator.connection` (Chromium, rounded and noised), DNS / TCP / TLS / TTFB / download timings of this page's own load, and a throughput guess from its biggest resource — nothing extra is fetched |
+| Server | What the request told the server before any script ran: IP address, country, region, city, coordinates and timezone from Vercel's geolocation headers, plus the edge region that answered. Echoed, never stored |
 | Browser APIs | Presence of 46 APIs by name (`"gpu" in navigator` and the like, never called), including the permission-gated ones this demo refuses to use |
 
 The unmasked WebGL renderer usually names the exact GPU — often the exact
 machine model. It costs a page nothing to read.
+
+The deductions are plain rules in `src/deduce/rules.ts` over data tables in
+`src/deduce/tables.ts` (Apple chips → products, built-in panels, GPU classes).
+Every real-device export dropped into `src/deduce/fixtures/` with a few expected
+substrings becomes a test case, so the tables get sharper as exports come in.
 
 ## Stability Lab
 
@@ -67,7 +78,7 @@ file is the only memory.
 ```sh
 npm install
 npm run dev     # dev server
-npm test        # self-checks for result/guard, sha256, the diff, and the benchmark workloads
+npm test        # self-checks for result/guard, sha256, the diff, the benchmark workloads, the deduction tables and rules (real exports as fixtures), and /api/where
 npm run build   # tsc --noEmit && vite build
 ```
 
