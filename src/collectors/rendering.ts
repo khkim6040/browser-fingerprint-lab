@@ -16,10 +16,21 @@ function drawCanvas2d(): string | undefined {
   ctx.font = "14px 'Arial'";
   ctx.fillStyle = "#f60";
   ctx.fillRect(0, 0, 120, 40);
+  const gradient = ctx.createLinearGradient(120, 0, 300, 0);
+  gradient.addColorStop(0, "#f60");
+  gradient.addColorStop(1, "#069");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(120, 0, 180, 40);
+  // Hangul falls back to whichever CJK font the OS ships; the shadow exercises the blur path.
+  ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+  ctx.shadowBlur = 4;
+  ctx.shadowOffsetX = 2;
   ctx.fillStyle = "#069";
-  ctx.fillText("Fingerprint lab \u{1F50E} gq", 2, 15);
+  ctx.fillText("지문 실험실 Fingerprint lab \u{1F50E} gq", 2, 15);
+  ctx.shadowBlur = 0;
+  ctx.shadowOffsetX = 0;
   ctx.fillStyle = "rgba(102, 200, 0, 0.7)";
-  ctx.fillText("Fingerprint lab \u{1F50E} gq", 4, 25);
+  ctx.fillText("지문 실험실 Fingerprint lab \u{1F50E} gq", 4, 25);
   ctx.globalCompositeOperation = "multiply";
   ctx.beginPath();
   ctx.arc(60, 40, 30, 0, Math.PI * 2);
