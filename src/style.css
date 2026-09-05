@@ -116,6 +116,8 @@ h2 .count { font-weight: 400; letter-spacing: 0.04em; text-transform: none; }
 .print.pending { color: var(--dim); font-weight: 400; animation: pulse 1.2s ease-in-out infinite alternate; }
 @keyframes pulse { from { opacity: 0.4; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .print.pending { animation: none; } }
+.verdict { margin: 0; padding: 0 1rem 1rem; color: var(--accent); font-size: 1rem; }
+.verdict:empty { display: none; }
 #hero .note { border-top: 1px solid var(--line); border-bottom: none; }
 
 #lab-toolbar {

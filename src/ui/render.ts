@@ -85,7 +85,10 @@ export function renderHero(root: HTMLElement, sections: Section[], elapsedMs: nu
     print.textContent = composite?.error ?? "unavailable";
   }
 
-  const rows = sections.filter((s) => s.title !== "Fingerprint").flatMap((s) => s.results);
+  const verdict = sections.find((s) => s.title === "Deductions")?.results.find((r) => r.name === "Verdict");
+  root.querySelector<HTMLElement>(".verdict")!.textContent = verdict?.supported ? String(verdict.value) : "";
+
+  const rows = sections.filter((s) => s.title !== "Fingerprint" && s.title !== "Deductions").flatMap((s) => s.results);
   const exposed = rows.filter((r) => r.supported).length;
   root.querySelector<HTMLElement>(".note")!.textContent =
     `${rows.length} signals read in ${(elapsedMs / 1000).toFixed(1)} s: ${exposed} exposed, ` +

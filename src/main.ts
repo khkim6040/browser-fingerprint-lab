@@ -15,6 +15,7 @@ import { collectNetwork } from "./collectors/network";
 import { collectServer } from "./collectors/where";
 import { collectFeatures } from "./collectors/features";
 import { collectFingerprint } from "./collectors/fingerprint";
+import { collectDeductions } from "./collectors/deductions";
 import { render, renderHero } from "./ui/render";
 import { mountLab } from "./ui/lab";
 
@@ -37,7 +38,11 @@ const COLLECTORS = [
 
 const started = performance.now();
 const collected = await Promise.all(COLLECTORS.map(([title, fn]) => guard(title, fn)));
-const sections = [await guard("Fingerprint", () => collectFingerprint(collected)), ...collected];
+const sections = [
+  await guard("Fingerprint", () => collectFingerprint(collected)),
+  await guard("Deductions", () => collectDeductions(collected)),
+  ...collected,
+];
 
 render(document.querySelector<HTMLElement>("#sections")!, sections);
 renderHero(document.querySelector<HTMLElement>("#hero")!, sections, performance.now() - started);
