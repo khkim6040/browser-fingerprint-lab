@@ -3,6 +3,7 @@ import { guard } from "./types";
 import { collectEnvironment } from "./collectors/environment";
 import { collectCpu } from "./collectors/cpu";
 import { collectMemory } from "./collectors/memory";
+import { collectStorage } from "./collectors/storage";
 import { collectDisplay } from "./collectors/display";
 import { collectInput } from "./collectors/input";
 import { collectWebgl } from "./collectors/webgl";
@@ -18,6 +19,7 @@ const COLLECTORS = [
   ["Environment", collectEnvironment],
   ["CPU", collectCpu],
   ["Memory", collectMemory],
+  ["Storage", collectStorage],
   ["Display", collectDisplay],
   ["Input", collectInput],
   ["WebGL", collectWebgl],
