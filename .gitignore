@@ -2,3 +2,5 @@ node_modules
 dist
 HANDOFF.md
 roadmap.md
+.vercel
+.env*
