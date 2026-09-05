@@ -8,6 +8,7 @@ import { collectWebgl } from "./collectors/webgl";
 import { collectWebgpu } from "./collectors/webgpu";
 import { collectRendering } from "./collectors/rendering";
 import { render } from "./ui/render";
+import { mountLab } from "./ui/lab";
 
 const COLLECTORS = [
   ["Environment", collectEnvironment],
@@ -22,3 +23,9 @@ const COLLECTORS = [
 const sections = await Promise.all(COLLECTORS.map(([title, fn]) => guard(title, fn)));
 
 render(document.querySelector<HTMLElement>("#sections")!, sections);
+mountLab(
+  document.querySelector<HTMLElement>("#lab-toolbar")!,
+  document.querySelector<HTMLElement>("#lab")!,
+  sections,
+  __APP_VERSION__,
+);

@@ -87,3 +87,26 @@ h2 {
   .row { grid-template-columns: 1fr auto; }
   .name { grid-column: 1 / -1; }
 }
+
+#lab-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+button, .button {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+}
+button:hover, .button:hover { border-color: var(--accent); }
+.button input { display: none; }
+
+.note.error { color: #e07f7f; }
+.badge.same { color: #7fd1b9; }
+.badge.changed { color: #e07f7f; }
+.badge.new { color: #8fb2e0; }
+.badge.gone { color: #5a646e; }

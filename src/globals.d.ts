@@ -51,3 +51,6 @@ interface GPU {
 interface Navigator {
   readonly gpu?: GPU;
 }
+
+/** package.json version, injected by vite `define` (stamped into JSON exports). */
+declare const __APP_VERSION__: string;
