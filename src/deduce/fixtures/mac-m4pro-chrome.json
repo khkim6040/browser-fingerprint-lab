@@ -1,0 +1,1094 @@
+{
+  "export": {
+    "version": "1.0.0",
+    "exportedAt": "2026-09-05T12:42:54.275Z",
+    "sections": [
+      {
+        "title": "Fingerprint",
+        "note": "SHA-256 over the signals in the sections below, grouped by category, then once more over the four. GPU capability is the part of Hardware that WebGL and WebGPU report without drawing anything. Nothing here is stored or sent: reload, and the page has to compute it from scratch — which is the point. Signals that move between loads (benchmarks, viewport, heap) are left out.",
+        "results": [
+          {
+            "name": "Hardware",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "a836043054f5f582"
+          },
+          {
+            "name": "Rendering",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "9eae0a41ad1d5323"
+          },
+          {
+            "name": "Audio",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "627dc2998fcf6c0f"
+          },
+          {
+            "name": "Environment",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "1b4a7de7e5f05e6b"
+          },
+          {
+            "name": "GPU capability",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "f0dc652ab031bc42"
+          },
+          {
+            "name": "Composite",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "1b35-f93d-813b-15d9"
+          }
+        ]
+      },
+      {
+        "title": "Environment",
+        "results": [
+          {
+            "name": "Browser",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "Google Chrome 152"
+          },
+          {
+            "name": "OS",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "macOS"
+          },
+          {
+            "name": "OS version",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "26.5.1"
+          },
+          {
+            "name": "Architecture",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "arm"
+          },
+          {
+            "name": "Bitness",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "64"
+          },
+          {
+            "name": "Model",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE"
+          },
+          {
+            "name": "Form factors",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": [
+              "Desktop"
+            ]
+          },
+          {
+            "name": "Full version list",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": [
+              "Chromium 152.0.7977.66",
+              "Google Chrome 152.0.7977.66"
+            ]
+          },
+          {
+            "name": "Mobile",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": false
+          },
+          {
+            "name": "User agent",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36"
+          },
+          {
+            "name": "Vendor",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "Google Inc."
+          },
+          {
+            "name": "Platform (legacy)",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "MacIntel"
+          },
+          {
+            "name": "Language",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "en-US"
+          },
+          {
+            "name": "Languages",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": [
+              "en-US",
+              "ko-KR",
+              "ko",
+              "ja-JP",
+              "ja",
+              "en"
+            ]
+          },
+          {
+            "name": "Timezone",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "Asia/Seoul"
+          },
+          {
+            "name": "Locale",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "en-US"
+          },
+          {
+            "name": "Calendar",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "gregory"
+          },
+          {
+            "name": "Numbering system",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "latn"
+          },
+          {
+            "name": "Cookies enabled",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": true
+          },
+          {
+            "name": "Do Not Track",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE"
+          },
+          {
+            "name": "PDF viewer enabled",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": true
+          },
+          {
+            "name": "Webdriver",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": false
+          }
+        ]
+      },
+      {
+        "title": "CPU",
+        "note": "Scores are timings of fixed work, so they move with thermal state, power mode, other tabs and browser version: a rough tier, not a model number. Worker scaling shows how many cores the browser really gives a page.",
+        "results": [
+          {
+            "name": "Logical processors",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 12
+          },
+          {
+            "name": "Single-thread score",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": 146
+          },
+          {
+            "name": "Benchmark breakdown",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": [
+              "integer 14.0 ms",
+              "float 5.3 ms",
+              "sort 13.9 ms",
+              "hash 9.8 ms",
+              "json 4.7 ms",
+              "matrix 5.8 ms",
+              "wasm 14.8 ms"
+            ]
+          },
+          {
+            "name": "Worker scaling",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": [
+              "1× → 1.0",
+              "2× → 2.0",
+              "4× → 2.0",
+              "8× → 4.0",
+              "12× → 3.0"
+            ]
+          },
+          {
+            "name": "Effective parallelism",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "~4.0 of 12"
+          },
+          {
+            "name": "CPU model",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          },
+          {
+            "name": "CPU clock speed",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          },
+          {
+            "name": "Physical cores",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          },
+          {
+            "name": "CPU serial",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          }
+        ]
+      },
+      {
+        "title": "Memory",
+        "note": "Device memory is bucketed on purpose, not your installed RAM. The heap figures describe this tab's JavaScript, not the machine, and Chromium quantises them.",
+        "results": [
+          {
+            "name": "Reported device memory",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "16 GB"
+          },
+          {
+            "name": "JS heap limit",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "4192 MB"
+          },
+          {
+            "name": "JS heap total",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "23 MB"
+          },
+          {
+            "name": "JS heap used",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "15 MB"
+          },
+          {
+            "name": "Exact RAM size",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          },
+          {
+            "name": "RAM manufacturer",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          },
+          {
+            "name": "RAM frequency",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          },
+          {
+            "name": "RAM module count",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          }
+        ]
+      },
+      {
+        "title": "Storage",
+        "note": "Quota is what the browser would let this origin store — usually a slice of free disk space, so it hints at the disk without naming it. The disk itself is off limits.",
+        "results": [
+          {
+            "name": "Origin storage usage",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "0.0 MB"
+          },
+          {
+            "name": "Origin storage quota",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "10.7 GB"
+          },
+          {
+            "name": "Physical disk size",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          },
+          {
+            "name": "Disk model",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          },
+          {
+            "name": "Free disk space",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          },
+          {
+            "name": "Filesystem",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          },
+          {
+            "name": "Disk serial",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          },
+          {
+            "name": "Disk manufacturer",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE",
+            "error": "never exposed to web pages"
+          }
+        ]
+      },
+      {
+        "title": "Display",
+        "note": "Refresh rate is inferred from animation-frame timing, so background tabs, power saving and variable-refresh displays all move it.",
+        "results": [
+          {
+            "name": "Resolution",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "1920 x 1080"
+          },
+          {
+            "name": "Available",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "1920 x 1050"
+          },
+          {
+            "name": "Color depth",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 24
+          },
+          {
+            "name": "Pixel depth",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 24
+          },
+          {
+            "name": "Device pixel ratio",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 1
+          },
+          {
+            "name": "Viewport",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "1920 x 962"
+          },
+          {
+            "name": "Window outer size",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "1920 x 1049"
+          },
+          {
+            "name": "Orientation",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "landscape-primary"
+          },
+          {
+            "name": "Frame interval",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "16.70 ms"
+          },
+          {
+            "name": "Estimated refresh rate",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "~60 Hz"
+          },
+          {
+            "name": "Color gamut",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "srgb"
+          },
+          {
+            "name": "Dynamic range",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "standard"
+          },
+          {
+            "name": "Color scheme",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "light"
+          },
+          {
+            "name": "Contrast preference",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "no-preference"
+          },
+          {
+            "name": "Reduced motion",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "no-preference"
+          },
+          {
+            "name": "Reduced transparency",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "no-preference"
+          },
+          {
+            "name": "Forced colors",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "none"
+          }
+        ]
+      },
+      {
+        "title": "Input",
+        "results": [
+          {
+            "name": "Touch points",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 0
+          },
+          {
+            "name": "Pointer",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "fine"
+          },
+          {
+            "name": "Any pointer",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "fine"
+          },
+          {
+            "name": "Hover",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "hover"
+          },
+          {
+            "name": "Any hover",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "hover"
+          },
+          {
+            "name": "Likely input environment",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "desktop or laptop — mouse or trackpad, no touch"
+          }
+        ]
+      },
+      {
+        "title": "WebGL",
+        "note": "Unmasked vendor and renderer come from a debug extension a browser may remove, or answer with a generalised model name rather than the real one.",
+        "results": [
+          {
+            "name": "API version",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "WebGL 2"
+          },
+          {
+            "name": "Vendor",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "WebKit"
+          },
+          {
+            "name": "Renderer",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "WebKit WebGL"
+          },
+          {
+            "name": "Unmasked vendor",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "Google Inc. (Apple)"
+          },
+          {
+            "name": "Unmasked renderer",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)"
+          },
+          {
+            "name": "GL version",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+          },
+          {
+            "name": "Shading language",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)"
+          },
+          {
+            "name": "Max texture size",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 16384
+          },
+          {
+            "name": "Max cube map size",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 16384
+          },
+          {
+            "name": "Max viewport dims",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "16384 x 16384"
+          },
+          {
+            "name": "Max renderbuffer size",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 16384
+          },
+          {
+            "name": "Max vertex attribs",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 16
+          },
+          {
+            "name": "Max texture units",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 16
+          },
+          {
+            "name": "Max combined units",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 32
+          },
+          {
+            "name": "Max varying vectors",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 30
+          },
+          {
+            "name": "Max vertex uniforms",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 1024
+          },
+          {
+            "name": "Max fragment uniforms",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 1024
+          },
+          {
+            "name": "Antialiasing",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": true
+          },
+          {
+            "name": "Vertex high float",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "precision 23, range -2^127 .. 2^127"
+          },
+          {
+            "name": "Fragment high float",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "precision 23, range -2^127 .. 2^127"
+          },
+          {
+            "name": "Extension count",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 36
+          },
+          {
+            "name": "Extensions",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": [
+              "EXT_clip_control",
+              "EXT_color_buffer_float",
+              "EXT_color_buffer_half_float",
+              "EXT_conservative_depth",
+              "EXT_depth_clamp",
+              "EXT_disjoint_timer_query_webgl2",
+              "EXT_float_blend",
+              "EXT_polygon_offset_clamp",
+              "EXT_render_snorm",
+              "EXT_texture_compression_bptc",
+              "EXT_texture_compression_rgtc",
+              "EXT_texture_filter_anisotropic",
+              "EXT_texture_mirror_clamp_to_edge",
+              "EXT_texture_norm16",
+              "KHR_parallel_shader_compile",
+              "NV_shader_noperspective_interpolation",
+              "OES_draw_buffers_indexed",
+              "OES_sample_variables",
+              "OES_shader_multisample_interpolation",
+              "OES_texture_float_linear",
+              "WEBGL_blend_func_extended",
+              "WEBGL_clip_cull_distance",
+              "WEBGL_compressed_texture_astc",
+              "WEBGL_compressed_texture_etc",
+              "WEBGL_compressed_texture_etc1",
+              "WEBGL_compressed_texture_pvrtc",
+              "WEBGL_compressed_texture_s3tc",
+              "WEBGL_compressed_texture_s3tc_srgb",
+              "WEBGL_debug_renderer_info",
+              "WEBGL_debug_shaders",
+              "WEBGL_lose_context",
+              "WEBGL_multi_draw",
+              "WEBGL_polygon_mode",
+              "WEBGL_provoking_vertex",
+              "WEBGL_render_shared_exponent",
+              "WEBGL_stencil_texturing"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "WebGPU",
+        "note": "The spec lets a browser tier, round, or blank these values to limit fingerprinting, so they describe a reported class of device rather than the exact hardware.",
+        "results": [
+          {
+            "name": "Vendor",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "apple"
+          },
+          {
+            "name": "Architecture",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "metal-3"
+          },
+          {
+            "name": "Device",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE"
+          },
+          {
+            "name": "Description",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE"
+          },
+          {
+            "name": "Feature count",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": 23
+          },
+          {
+            "name": "Features",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": [
+              "bgra8unorm-storage",
+              "clip-distances",
+              "core-features-and-limits",
+              "depth-clip-control",
+              "depth32float-stencil8",
+              "dual-source-blending",
+              "float32-blendable",
+              "float32-filterable",
+              "indirect-first-instance",
+              "primitive-index",
+              "rg11b10ufloat-renderable",
+              "shader-f16",
+              "subgroup-size-control",
+              "subgroups",
+              "texture-component-swizzle",
+              "texture-compression-astc",
+              "texture-compression-astc-sliced-3d",
+              "texture-compression-bc",
+              "texture-compression-bc-sliced-3d",
+              "texture-compression-etc2",
+              "texture-formats-tier1",
+              "texture-formats-tier2",
+              "timestamp-query"
+            ]
+          },
+          {
+            "name": "maxTextureDimension2D",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": 16384
+          },
+          {
+            "name": "maxTextureDimension3D",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": 2048
+          },
+          {
+            "name": "maxBufferSize",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": 4294967292
+          },
+          {
+            "name": "maxBindGroups",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": 4
+          },
+          {
+            "name": "maxStorageBufferBindingSize",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": 4294967292
+          },
+          {
+            "name": "maxComputeWorkgroupStorageSize",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": 32768
+          },
+          {
+            "name": "maxComputeInvocationsPerWorkgroup",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": 1024
+          }
+        ]
+      },
+      {
+        "title": "Rendering",
+        "note": "Hashes of what this device actually drew, not values an API reported. Each is drawn twice: browsers that inject anti-fingerprinting noise produce a different hash every time.",
+        "results": [
+          {
+            "name": "Canvas 2D",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "d0e4fd887ff4f110"
+          },
+          {
+            "name": "WebGL render",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "dda3301730a2bd01"
+          }
+        ]
+      },
+      {
+        "title": "Audio",
+        "note": "No microphone was opened, nothing was recorded and nothing was audible. The live context is read for its settings only and never started; the hash is of a synthetic 10 kHz tone rendered offline, twice.",
+        "results": [
+          {
+            "name": "Sample rate",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "48000 Hz"
+          },
+          {
+            "name": "Base latency",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "5.33 ms"
+          },
+          {
+            "name": "Output latency",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE"
+          },
+          {
+            "name": "Context state",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "suspended"
+          },
+          {
+            "name": "OfflineAudio render",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "235ebb31c876b7d8"
+          }
+        ]
+      },
+      {
+        "title": "Media",
+        "note": "What this browser claims it can decode: 4K60 video and 48 kHz stereo audio per codec, and whether playback would be smooth and power-efficient — the latter usually means a hardware decoder. No media is fetched or played.",
+        "results": [
+          {
+            "name": "H.264 4K60",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "supported, smooth, power-efficient"
+          },
+          {
+            "name": "H.265 4K60",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "supported, smooth, power-efficient"
+          },
+          {
+            "name": "VP9 4K60",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "supported, smooth, power-efficient"
+          },
+          {
+            "name": "AV1 4K60",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "supported, smooth, power-efficient"
+          },
+          {
+            "name": "AAC",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "supported, smooth, power-efficient"
+          },
+          {
+            "name": "Opus",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "supported, smooth, power-efficient"
+          }
+        ]
+      },
+      {
+        "title": "Network",
+        "note": "Connection figures are rounded and noised by the browser (Chromium only). The timings are of this page's own document load — nothing extra is fetched — so caches, CDN distance and the HTTP version shape them as much as the link does.",
+        "results": [
+          {
+            "name": "Online",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": true
+          },
+          {
+            "name": "Effective type",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "4g"
+          },
+          {
+            "name": "Downlink",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "10 Mbps"
+          },
+          {
+            "name": "Round-trip time",
+            "supported": true,
+            "evidenceType": "COARSE",
+            "value": "100 ms"
+          },
+          {
+            "name": "Save data",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": false
+          },
+          {
+            "name": "Connection type",
+            "supported": false,
+            "evidenceType": "UNAVAILABLE"
+          },
+          {
+            "name": "Protocol",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "h2"
+          },
+          {
+            "name": "DNS lookup",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "0.0 ms"
+          },
+          {
+            "name": "TCP connect",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "0.0 ms"
+          },
+          {
+            "name": "TLS handshake",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "0.0 ms"
+          },
+          {
+            "name": "Time to first byte",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "15.1 ms"
+          },
+          {
+            "name": "Document download",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "27.8 ms"
+          },
+          {
+            "name": "Throughput",
+            "supported": true,
+            "evidenceType": "INFERRED",
+            "value": "~3.0 Mbps (from a 0.3 KB transfer)"
+          }
+        ]
+      },
+      {
+        "title": "Browser APIs",
+        "note": "Which APIs exist here, by name only — none is called. The set a browser ships is a fingerprint in itself, and the missing ones show what it deliberately left out.",
+        "results": [
+          {
+            "name": "Supported",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": "43 / 46"
+          },
+          {
+            "name": "Available",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": [
+              "WebGL 2",
+              "WebAssembly",
+              "Web Workers",
+              "OffscreenCanvas",
+              "WebRTC",
+              "Web Audio",
+              "WebCodecs",
+              "Speech Synthesis",
+              "WebSocket",
+              "WebTransport",
+              "Broadcast Channel",
+              "Payment Request",
+              "Web Authentication",
+              "Notifications",
+              "Push API",
+              "Idle Detection",
+              "Compute Pressure",
+              "Device Orientation",
+              "File System Access",
+              "Screen Details",
+              "Local Font Access",
+              "WebGPU",
+              "Service Worker",
+              "MediaCapabilities",
+              "Media Session",
+              "Media Devices",
+              "Web Locks",
+              "Storage Manager",
+              "Clipboard",
+              "Web Share",
+              "Credential Management",
+              "Battery Status",
+              "Network Information",
+              "Vibration",
+              "Wake Lock",
+              "Web MIDI",
+              "Gamepad",
+              "WebXR",
+              "Geolocation",
+              "Web Bluetooth",
+              "WebUSB",
+              "WebHID",
+              "Web Serial"
+            ]
+          },
+          {
+            "name": "Missing",
+            "supported": true,
+            "evidenceType": "DIRECT",
+            "value": [
+              "SharedArrayBuffer",
+              "Web NFC",
+              "Contact Picker"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expect": {
+    "Verdict": [
+      "MacBook Pro 14",
+      "Mac mini",
+      "M4 Pro",
+      "24 GB+"
+    ],
+    "Machine": [
+      "M4 Pro",
+      "12-core",
+      "MacBook Pro 14",
+      "Mac mini"
+    ],
+    "Memory": [
+      "24 GB or more"
+    ],
+    "Display": [
+      "external",
+      "1920×1080"
+    ],
+    "Desk": [
+      "fills the screen"
+    ],
+    "Where": [
+      "unavailable",
+      "Asia/Seoul"
+    ],
+    "Languages": [
+      "Korean",
+      "Japanese"
+    ],
+    "Connection": [
+      "15 ms"
+    ]
+  }
+}
