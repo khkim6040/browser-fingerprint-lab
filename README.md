@@ -31,6 +31,7 @@ surface, which is why no user-agent string parsing is used to paper over gaps.
 
 | Section | Examples |
 | --- | --- |
+| Fingerprint | One SHA-256 per category (Hardware, Rendering, Audio, Environment) over the stable signals below, and a composite over those four. Benchmarks, viewport, heap and other per-load noise are left out |
 | Environment | UA Client Hints (OS, version, architecture, model), locale, timezone, `webdriver` |
 | CPU | `hardwareConcurrency`, a seven-workload benchmark (integer, float, sort, hash, JSON, matrix, hand-assembled wasm), Web Worker scaling → effective parallelism, and the CPU facts no page can read |
 | Memory | `deviceMemory` (bucketed, not your installed RAM), Chromium's quantised JS heap figures, and the RAM facts no page can read |
@@ -54,8 +55,9 @@ machine model. It costs a page nothing to read.
 reads such a file back and diffs it against the current run, signal by signal:
 `SAME`, `CHANGED` (with before → after), `NEW`, `GONE`, plus the share of
 signals that stayed identical. Reload, switch to incognito, plug in a monitor,
-or open the file in another browser to see which signals actually move. Nothing
-is stored between visits; the file is the only memory.
+or open the file in another browser to see which signals actually move — and
+whether the composite fingerprint survived. Nothing is stored between visits; the
+file is the only memory.
 
 ## Development
 
