@@ -36,8 +36,8 @@ export async function collectAudio(): Promise<Section> {
     note: "No microphone was opened, nothing was recorded and nothing was audible. The live context is read for its settings only and never started; the hash is of a synthetic 10 kHz tone rendered offline, twice.",
     results: [
       result("Sample rate", `${sampleRate} Hz`),
-      result("Base latency", ms(baseLatency)),
-      // Reported as 0 until the context actually runs, which needs a user gesture.
+      // Both read 0 until the context actually runs, which needs a user gesture.
+      result("Base latency", baseLatency ? ms(baseLatency) : undefined),
       result("Output latency", outputLatency ? ms(outputLatency) : undefined),
       result("Context state", state),
       result("OfflineAudio render", await stableHash(renderOffline), "INFERRED"),
