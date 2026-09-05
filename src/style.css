@@ -48,6 +48,14 @@ h2 {
   color: var(--dim);
 }
 
+.note {
+  margin: 0;
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--dim);
+  font-size: 0.8125rem;
+}
+
 .row {
   display: grid;
   grid-template-columns: 14rem 1fr auto;

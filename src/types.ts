@@ -11,6 +11,8 @@ export interface CollectorResult<T = unknown> {
 export interface Section {
   title: string;
   results: CollectorResult[];
+  /** Caveat shown under the heading, e.g. values the spec allows a browser to fudge. */
+  note?: string;
 }
 
 export type Collector = () => Section | Promise<Section>;

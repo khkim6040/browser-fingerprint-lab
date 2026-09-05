@@ -35,7 +35,14 @@ export function render(root: HTMLElement, sections: Section[]): void {
       const el = document.createElement("section");
       const h = document.createElement("h2");
       h.textContent = s.title;
-      el.append(h, ...s.results.map(row));
+      el.append(h);
+      if (s.note) {
+        const note = document.createElement("p");
+        note.className = "note";
+        note.textContent = s.note;
+        el.append(note);
+      }
+      el.append(...s.results.map(row));
       return el;
     }),
   );
