@@ -29,21 +29,26 @@ function row(r: CollectorResult): HTMLElement {
   return el;
 }
 
+function sectionEl(s: Section): HTMLElement {
+  const el = document.createElement("section");
+  const h = document.createElement("h2");
+  h.textContent = s.title;
+  // How much of this section the current browser gives up: the compatibility indicator.
+  const count = document.createElement("span");
+  count.className = "count";
+  count.textContent = `${s.results.filter((r) => r.supported).length} / ${s.results.length} exposed`;
+  h.append(count);
+  el.append(h);
+  if (s.note) {
+    const note = document.createElement("p");
+    note.className = "note";
+    note.textContent = s.note;
+    el.append(note);
+  }
+  el.append(...s.results.map(row));
+  return el;
+}
+
 export function render(root: HTMLElement, sections: Section[]): void {
-  root.replaceChildren(
-    ...sections.map((s) => {
-      const el = document.createElement("section");
-      const h = document.createElement("h2");
-      h.textContent = s.title;
-      el.append(h);
-      if (s.note) {
-        const note = document.createElement("p");
-        note.className = "note";
-        note.textContent = s.note;
-        el.append(note);
-      }
-      el.append(...s.results.map(row));
-      return el;
-    }),
-  );
+  root.replaceChildren(...sections.map(sectionEl));
 }

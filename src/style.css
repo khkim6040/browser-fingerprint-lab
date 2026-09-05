@@ -38,6 +38,9 @@ section {
 }
 
 h2 {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
   margin: 0;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--line);
@@ -47,6 +50,8 @@ h2 {
   text-transform: uppercase;
   color: var(--dim);
 }
+
+h2 .count { font-weight: 400; letter-spacing: 0.04em; text-transform: none; }
 
 .note {
   margin: 0;
