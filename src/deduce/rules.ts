@@ -188,6 +188,7 @@ const desk: Rule = (get, f) => {
   const parts: string[] = [];
   if (f.os === "macOS") {
     if (res[0] > avail[0]) parts.push("Dock on the left or right");
+    // Menu bar alone is 25–37 px (30 on a 1× external display, 37 on a notched MacBook); any visible Dock adds 55+ px.
     else if (res[1] - avail[1] > 40) parts.push("Dock at the bottom");
     else parts.push("no Dock on this screen: hidden, or on another display");
   }
@@ -206,7 +207,8 @@ const where: Rule = (get, f) => {
   const ev = ["Server/City", "Server/Country", "Server/IP timezone", "Environment/Timezone"];
   if (!clock || !ipTz) return { name: "Where", value: `${f.place} by IP address`, evidence: ev };
   if (clock === ipTz) return { name: "Where", value: `${f.place} by IP address; the browser clock agrees (${clock}), so no sign of a VPN or proxy`, evidence: ev };
-  if (offset(clock) && offset(clock) === offset(ipTz)) {
+  const o = offset(clock);
+  if (o && o === offset(ipTz)) {
     return { name: "Where", value: `${f.place} by IP address; the clock (${clock}) and the IP (${ipTz}) keep the same time`, evidence: ev };
   }
   return { name: "Where", value: `the clock says ${clock} but the IP sits in ${ipTz} (${f.place}) — VPN, proxy, or travelling`, evidence: ev };
