@@ -1,4 +1,4 @@
-import { sha256 } from "../fingerprint/hash";
+import { stableHash } from "../fingerprint/hash";
 import { result, type Section } from "../types";
 
 /**
@@ -75,25 +75,6 @@ function drawWebgl(): Uint8Array<ArrayBuffer> | undefined {
   gl.readPixels(0, 0, canvas.width, canvas.height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
   gl.getExtension("WEBGL_lose_context")?.loseContext();
   return pixels;
-}
-
-/**
- * Draws twice. A browser that adds per-read noise (Firefox
- * `privacy.resistFingerprinting`, Safari) gives two different hashes, which is
- * itself the result worth showing — an unstable hash identifies nobody.
- */
-async function stableHash(
-  draw: () => string | Uint8Array<ArrayBuffer> | undefined,
-): Promise<string | undefined> {
-  const first = draw();
-  if (first === undefined) return undefined;
-  const second = draw();
-  if (second === undefined) return undefined;
-
-  const [a, b] = await Promise.all([sha256(first), sha256(second)]);
-  return a === b
-    ? a.slice(0, 16)
-    : `unstable — redraw gave ${a.slice(0, 16)} then ${b.slice(0, 16)}`;
 }
 
 export async function collectRendering(): Promise<Section> {
