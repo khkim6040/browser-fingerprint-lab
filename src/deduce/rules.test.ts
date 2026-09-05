@@ -78,6 +78,20 @@ assert.match(find(android, "Machine"), /Android phone or tablet, model SM-S928B/
 const vm = mk({ "Environment/OS": "Linux", "WebGL/Unmasked renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)" });
 assert.match(find(vm, "Machine"), /software rendering/);
 
+// Software renderer wins on macOS too — not every non-Apple-chip Mac is Intel-era.
+const macVm = mk({ "Environment/OS": "macOS", "WebGL/Unmasked renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)" });
+assert.match(find(macVm, "Machine"), /software rendering/);
+assert.doesNotMatch(find(macVm, "Machine"), /Intel-era/);
+
+// Apple Silicon under virtualization: a real (Metal) renderer string, not Intel/AMD.
+const macParavirtual = mk({ "Environment/OS": "macOS", "WebGL/Unmasked renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple Paravirtual device, Unspecified Version)" });
+assert.match(find(macParavirtual, "Machine"), /a Mac with .*Apple Paravirtual device/);
+assert.doesNotMatch(find(macParavirtual, "Machine"), /Intel-era/);
+
+// Genuine Intel Mac: the renderer names an Intel GPU.
+const macIntel = mk({ "Environment/OS": "macOS", "WebGL/Unmasked renderer": "ANGLE (Intel, Intel(R) Iris(TM) Plus Graphics 640, OpenGL 4.1)" });
+assert.match(find(macIntel, "Machine"), /an Intel-era Mac with Intel\(R\) Iris\(TM\) Plus Graphics 640/);
+
 // IP timezone vs browser clock: mismatch is a VPN tell, same offset is not.
 const vpn = mk({ "Environment/Timezone": "Asia/Seoul", "Server/Country": "US", "Server/City": "Los Angeles", "Server/IP timezone": "America/Los_Angeles" });
 assert.match(find(vpn, "Where"), /VPN, proxy, or travelling/);

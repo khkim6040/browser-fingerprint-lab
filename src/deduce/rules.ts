@@ -127,8 +127,12 @@ const machine: Rule = (get, f) => {
   }
   if (!renderer) return undefined;
   const model = gpuModel(renderer);
-  if (os === "macOS") return { name: "Machine", value: `an Intel-era Mac with ${model}`, evidence: ev };
   const cls = GPU_CLASSES.find((c) => c.pattern.test(renderer));
+  if (cls?.kind === "software") return { name: "Machine", value: `${os ?? "a PC"}: ${cls.conclusion} (${model})`, evidence: ev };
+  if (os === "macOS") {
+    const value = /Intel|AMD|Radeon/i.test(model) ? `an Intel-era Mac with ${model}` : `a Mac with ${model}`;
+    return { name: "Machine", value, evidence: ev };
+  }
   return { name: "Machine", value: `${os ?? "a PC"}: ${cls ? cls.conclusion : "a PC"} (${model})`, evidence: ev };
 };
 
