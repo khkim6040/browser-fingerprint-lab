@@ -12,6 +12,7 @@ import { collectRendering } from "./collectors/rendering";
 import { collectAudio } from "./collectors/audio";
 import { collectMedia } from "./collectors/media";
 import { collectNetwork } from "./collectors/network";
+import { collectServer } from "./collectors/where";
 import { collectFeatures } from "./collectors/features";
 import { collectFingerprint } from "./collectors/fingerprint";
 import { render, renderHero } from "./ui/render";
@@ -30,6 +31,7 @@ const COLLECTORS = [
   ["Audio", collectAudio],
   ["Media", collectMedia],
   ["Network", collectNetwork],
+  ["Server", collectServer],
   ["Browser APIs", collectFeatures],
 ] as const;
 
