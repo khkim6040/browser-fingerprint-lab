@@ -10,8 +10,9 @@
     "noEmit": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.test.ts"]
+  "include": ["src", "api"],
+  "exclude": ["src/**/*.test.ts", "api/**/*.test.ts"]
 }
