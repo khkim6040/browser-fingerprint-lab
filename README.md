@@ -38,6 +38,8 @@ surface, which is why no user-agent string parsing is used to paper over gaps.
 | WebGL | Vendor and renderer, the unmasked GPU string via `WEBGL_debug_renderer_info`, driver limits, shader precision, extension list |
 | WebGPU | Adapter vendor and architecture, supported features, key limits |
 | Rendering | SHA-256 of a Canvas 2D drawing and of a WebGL shader render, each drawn twice so per-load noise (Firefox `resistFingerprinting`, Safari) shows up as `unstable` |
+| Audio | `AudioContext` sample rate, base/output latency and state (read, never started), plus SHA-256 of a 10 kHz tone rendered through a compressor in `OfflineAudioContext` — no microphone, no sound |
+| Media | `MediaCapabilities.decodingInfo()` for H.264 / H.265 / VP9 / AV1 at 4K60 and AAC / Opus: supported, smooth, power-efficient (a hardware-decoder hint) |
 
 The unmasked WebGL renderer usually names the exact GPU — often the exact
 machine model. It costs a page nothing to read.
