@@ -14,7 +14,7 @@ import { collectMedia } from "./collectors/media";
 import { collectNetwork } from "./collectors/network";
 import { collectFeatures } from "./collectors/features";
 import { collectFingerprint } from "./collectors/fingerprint";
-import { render } from "./ui/render";
+import { render, renderHero } from "./ui/render";
 import { mountLab } from "./ui/lab";
 
 const COLLECTORS = [
@@ -33,10 +33,12 @@ const COLLECTORS = [
   ["Browser APIs", collectFeatures],
 ] as const;
 
+const started = performance.now();
 const collected = await Promise.all(COLLECTORS.map(([title, fn]) => guard(title, fn)));
 const sections = [await guard("Fingerprint", () => collectFingerprint(collected)), ...collected];
 
 render(document.querySelector<HTMLElement>("#sections")!, sections);
+renderHero(document.querySelector<HTMLElement>("#hero")!, sections, performance.now() - started);
 mountLab(
   document.querySelector<HTMLElement>("#lab-toolbar")!,
   document.querySelector<HTMLElement>("#lab")!,

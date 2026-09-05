@@ -93,6 +93,21 @@ h2 .count { font-weight: 400; letter-spacing: 0.04em; text-transform: none; }
   .name { grid-column: 1 / -1; }
 }
 
+#hero { margin-top: 1.5rem; }
+.print {
+  margin: 0;
+  padding: 1.25rem 1rem 1rem;
+  font-size: clamp(1.75rem, 6vw, 3.25rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+.print.pending { color: var(--dim); font-weight: 400; animation: pulse 1.2s ease-in-out infinite alternate; }
+@keyframes pulse { from { opacity: 0.4; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .print.pending { animation: none; } }
+#hero .note { border-top: 1px solid var(--line); border-bottom: none; }
+
 #lab-toolbar {
   display: flex;
   gap: 0.5rem;
