@@ -8,20 +8,23 @@ const time = (fn: () => unknown): number => {
   return performance.now() - t;
 };
 
-/** Wall time for n workers doing the same fixed job at once (boot excluded). */
+/**
+ * Slowest of n workers doing the same fixed job at once, each timing itself. The
+ * main thread runs the other collectors meanwhile, so a clock kept there would
+ * count their blocking as worker time.
+ */
 async function wall(n: number): Promise<number> {
   const workers = Array.from(
     { length: n },
     () => new Worker(new URL("../bench/worker.ts", import.meta.url), { type: "module" }),
   );
-  const reply = (w: Worker) => new Promise<void>((done) => (w.onmessage = () => done()));
+  const reply = (w: Worker) => new Promise<number>((done) => (w.onmessage = (e) => done(e.data.ms)));
   await Promise.all(workers.map(reply));
-  const t = performance.now();
   const finished = Promise.all(workers.map(reply));
   workers.forEach((w) => w.postMessage("go"));
-  await finished;
+  const ms = await finished;
   workers.forEach((w) => w.terminate());
-  return performance.now() - t;
+  return Math.max(...ms);
 }
 
 /** Throughput relative to one worker at 1, 2, 4, 8… workers, up to the core count. */
