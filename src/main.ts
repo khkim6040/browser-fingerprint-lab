@@ -4,6 +4,7 @@ import { collectEnvironment } from "./collectors/environment";
 import { collectCpu } from "./collectors/cpu";
 import { collectMemory } from "./collectors/memory";
 import { collectDisplay } from "./collectors/display";
+import { collectWebgl } from "./collectors/webgl";
 import { render } from "./ui/render";
 
 const COLLECTORS = [
@@ -11,6 +12,7 @@ const COLLECTORS = [
   ["CPU", collectCpu],
   ["Memory", collectMemory],
   ["Display", collectDisplay],
+  ["WebGL", collectWebgl],
 ] as const;
 
 const sections = await Promise.all(COLLECTORS.map(([title, fn]) => guard(title, fn)));
