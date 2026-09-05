@@ -33,7 +33,8 @@ surface, which is why no user-agent string parsing is used to paper over gaps.
 | --- | --- |
 | Environment | UA Client Hints (OS, version, architecture, model), locale, timezone, `webdriver` |
 | CPU | `hardwareConcurrency` |
-| Memory | `deviceMemory` (bucketed, not your installed RAM) |
+| Memory | `deviceMemory` (bucketed, not your installed RAM), Chromium's quantised JS heap figures, and the RAM facts no page can read |
+| Storage | `navigator.storage.estimate()` usage and quota (a slice of free disk), and the disk facts no page can read |
 | Display | Screen and viewport geometry, DPR, plus media queries: colour gamut, dynamic range, and user preferences (colour scheme, contrast, reduced motion, forced colours) |
 | Input | `maxTouchPoints`, pointer/hover capability classes, and a guess at the kind of machine they add up to |
 | WebGL | Vendor and renderer, the unmasked GPU string via `WEBGL_debug_renderer_info`, driver limits, shader precision, extension list |
@@ -41,6 +42,7 @@ surface, which is why no user-agent string parsing is used to paper over gaps.
 | Rendering | SHA-256 of a Canvas 2D drawing and of a WebGL shader render, each drawn twice so per-load noise (Firefox `resistFingerprinting`, Safari) shows up as `unstable` |
 | Audio | `AudioContext` sample rate, base/output latency and state (read, never started), plus SHA-256 of a 10 kHz tone rendered through a compressor in `OfflineAudioContext` — no microphone, no sound |
 | Media | `MediaCapabilities.decodingInfo()` for H.264 / H.265 / VP9 / AV1 at 4K60 and AAC / Opus: supported, smooth, power-efficient (a hardware-decoder hint) |
+| Network | `navigator.connection` (Chromium, rounded and noised), DNS / TCP / TLS / TTFB / download timings of this page's own load, and a throughput guess from its biggest resource — nothing extra is fetched |
 | Browser APIs | Presence of 46 APIs by name (`"gpu" in navigator` and the like, never called), including the permission-gated ones this demo refuses to use |
 
 The unmasked WebGL renderer usually names the exact GPU — often the exact
@@ -65,4 +67,5 @@ npm run build   # tsc --noEmit && vite build
 ```
 
 Every collector runs behind `guard()`, so one throwing API degrades to a single
-`UNAVAILABLE` row instead of blanking the page. Add new collectors the same way.
+`UNAVAILABLE` row instead of blanking the page. Add new collectors the same way,
+and use `unavailable()` for values no browser exposes by design, so the row says why.
