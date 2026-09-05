@@ -37,16 +37,26 @@ surface, which is why no user-agent string parsing is used to paper over gaps.
 | Display | Screen and viewport geometry, DPR, plus media queries: colour gamut, dynamic range, pointer/hover class, and user preferences (colour scheme, contrast, reduced motion, forced colours) |
 | WebGL | Vendor and renderer, the unmasked GPU string via `WEBGL_debug_renderer_info`, driver limits, shader precision, extension list |
 | WebGPU | Adapter vendor and architecture, supported features, key limits |
+| Rendering | SHA-256 of a Canvas 2D drawing and of a WebGL shader render, each drawn twice so per-load noise (Firefox `resistFingerprinting`, Safari) shows up as `unstable` |
 
 The unmasked WebGL renderer usually names the exact GPU — often the exact
 machine model. It costs a page nothing to read.
+
+## Stability Lab
+
+**Export JSON** saves everything on the page to a file. **Import JSON to compare**
+reads such a file back and diffs it against the current run, signal by signal:
+`SAME`, `CHANGED` (with before → after), `NEW`, `GONE`, plus the share of
+signals that stayed identical. Reload, switch to incognito, plug in a monitor,
+or open the file in another browser to see which signals actually move. Nothing
+is stored between visits; the file is the only memory.
 
 ## Development
 
 ```sh
 npm install
 npm run dev     # dev server
-npm test        # self-check for the result/guard helpers
+npm test        # self-checks for result/guard, sha256 and the diff
 npm run build   # tsc --noEmit && vite build
 ```
 
