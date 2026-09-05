@@ -7,6 +7,7 @@ import { collectDisplay } from "./collectors/display";
 import { collectWebgl } from "./collectors/webgl";
 import { collectWebgpu } from "./collectors/webgpu";
 import { collectRendering } from "./collectors/rendering";
+import { collectAudio } from "./collectors/audio";
 import { render } from "./ui/render";
 import { mountLab } from "./ui/lab";
 
@@ -18,6 +19,7 @@ const COLLECTORS = [
   ["WebGL", collectWebgl],
   ["WebGPU", collectWebgpu],
   ["Rendering", collectRendering],
+  ["Audio", collectAudio],
 ] as const;
 
 const sections = await Promise.all(COLLECTORS.map(([title, fn]) => guard(title, fn)));
