@@ -29,9 +29,12 @@ const VOLATILE = new Set([
  * Canonical text per category: sorted "Section/Signal=value" lines. The value
  * rule matches lab/diff.ts, so what the Stability Lab calls SAME hashes the same.
  */
-export function canonical(sections: Section[]): Record<string, string> {
+export function canonical(
+  sections: Section[],
+  groups: Record<string, string[]> = CATEGORIES,
+): Record<string, string> {
   const out: Record<string, string> = {};
-  for (const [category, titles] of Object.entries(CATEGORIES)) {
+  for (const [category, titles] of Object.entries(groups)) {
     const lines: string[] = [];
     for (const s of sections) {
       if (!titles.includes(s.title)) continue;
