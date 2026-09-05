@@ -13,6 +13,7 @@ import { collectAudio } from "./collectors/audio";
 import { collectMedia } from "./collectors/media";
 import { collectNetwork } from "./collectors/network";
 import { collectFeatures } from "./collectors/features";
+import { collectFingerprint } from "./collectors/fingerprint";
 import { render } from "./ui/render";
 import { mountLab } from "./ui/lab";
 
@@ -32,7 +33,8 @@ const COLLECTORS = [
   ["Browser APIs", collectFeatures],
 ] as const;
 
-const sections = await Promise.all(COLLECTORS.map(([title, fn]) => guard(title, fn)));
+const collected = await Promise.all(COLLECTORS.map(([title, fn]) => guard(title, fn)));
+const sections = [await guard("Fingerprint", () => collectFingerprint(collected)), ...collected];
 
 render(document.querySelector<HTMLElement>("#sections")!, sections);
 mountLab(
