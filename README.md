@@ -6,7 +6,10 @@
 
 An educational demo of what a web page learns about your device **without ever
 showing a permission prompt**. No dialog to accept, no button to click — the
-page just reads what the browser hands out for free.
+page just reads what the browser hands out for free, folds about 130 of those
+signals into one composite fingerprint, and invites you to test whether it can
+recognise you again after a reload, a restart, incognito, or another browser.
+Every section header counts how many of its signals this browser exposes.
 
 ## Principles
 
@@ -40,7 +43,7 @@ surface, which is why no user-agent string parsing is used to paper over gaps.
 | Input | `maxTouchPoints`, pointer/hover capability classes, and a guess at the kind of machine they add up to |
 | WebGL | Vendor and renderer, the unmasked GPU string via `WEBGL_debug_renderer_info`, driver limits, shader precision, extension list |
 | WebGPU | Adapter vendor and architecture, supported features, key limits |
-| Rendering | SHA-256 of a Canvas 2D drawing and of a WebGL shader render, each drawn twice so per-load noise (Firefox `resistFingerprinting`, Safari) shows up as `unstable` |
+| Rendering | SHA-256 of a Canvas 2D drawing (Latin and Hangul text, emoji, gradient, shadow, blend mode, curve) and of a WebGL shader render, each drawn twice so per-load noise (Firefox `resistFingerprinting`, Safari) shows up as `unstable` |
 | Audio | `AudioContext` sample rate, base/output latency and state (read, never started), plus SHA-256 of a 10 kHz tone rendered through a compressor in `OfflineAudioContext` — no microphone, no sound |
 | Media | `MediaCapabilities.decodingInfo()` for H.264 / H.265 / VP9 / AV1 at 4K60 and AAC / Opus: supported, smooth, power-efficient (a hardware-decoder hint) |
 | Network | `navigator.connection` (Chromium, rounded and noised), DNS / TCP / TLS / TTFB / download timings of this page's own load, and a throughput guess from its biggest resource — nothing extra is fetched |
