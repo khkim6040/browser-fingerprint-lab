@@ -10,6 +10,7 @@ import { collectWebgpu } from "./collectors/webgpu";
 import { collectRendering } from "./collectors/rendering";
 import { collectAudio } from "./collectors/audio";
 import { collectMedia } from "./collectors/media";
+import { collectFeatures } from "./collectors/features";
 import { render } from "./ui/render";
 import { mountLab } from "./ui/lab";
 
@@ -24,6 +25,7 @@ const COLLECTORS = [
   ["Rendering", collectRendering],
   ["Audio", collectAudio],
   ["Media", collectMedia],
+  ["Browser APIs", collectFeatures],
 ] as const;
 
 const sections = await Promise.all(COLLECTORS.map(([title, fn]) => guard(title, fn)));
