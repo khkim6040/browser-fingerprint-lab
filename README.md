@@ -74,3 +74,7 @@ npm run build   # tsc --noEmit && vite build
 Every collector runs behind `guard()`, so one throwing API degrades to a single
 `UNAVAILABLE` row instead of blanking the page. Add new collectors the same way,
 and use `unavailable()` for values no browser exposes by design, so the row says why.
+
+## License
+
+[MIT](LICENSE)
