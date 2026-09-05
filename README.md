@@ -34,12 +34,14 @@ surface, which is why no user-agent string parsing is used to paper over gaps.
 | Environment | UA Client Hints (OS, version, architecture, model), locale, timezone, `webdriver` |
 | CPU | `hardwareConcurrency` |
 | Memory | `deviceMemory` (bucketed, not your installed RAM) |
-| Display | Screen and viewport geometry, DPR, plus media queries: colour gamut, dynamic range, pointer/hover class, and user preferences (colour scheme, contrast, reduced motion, forced colours) |
+| Display | Screen and viewport geometry, DPR, plus media queries: colour gamut, dynamic range, and user preferences (colour scheme, contrast, reduced motion, forced colours) |
+| Input | `maxTouchPoints`, pointer/hover capability classes, and a guess at the kind of machine they add up to |
 | WebGL | Vendor and renderer, the unmasked GPU string via `WEBGL_debug_renderer_info`, driver limits, shader precision, extension list |
 | WebGPU | Adapter vendor and architecture, supported features, key limits |
 | Rendering | SHA-256 of a Canvas 2D drawing and of a WebGL shader render, each drawn twice so per-load noise (Firefox `resistFingerprinting`, Safari) shows up as `unstable` |
 | Audio | `AudioContext` sample rate, base/output latency and state (read, never started), plus SHA-256 of a 10 kHz tone rendered through a compressor in `OfflineAudioContext` — no microphone, no sound |
 | Media | `MediaCapabilities.decodingInfo()` for H.264 / H.265 / VP9 / AV1 at 4K60 and AAC / Opus: supported, smooth, power-efficient (a hardware-decoder hint) |
+| Browser APIs | Presence of 46 APIs by name (`"gpu" in navigator` and the like, never called), including the permission-gated ones this demo refuses to use |
 
 The unmasked WebGL renderer usually names the exact GPU — often the exact
 machine model. It costs a page nothing to read.
