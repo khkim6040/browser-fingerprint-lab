@@ -42,6 +42,8 @@ const size = (get: Get, key: string): [number, number] | undefined => {
 };
 const list = (xs: string[], word = "or"): string =>
   xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} ${word} ${xs[xs.length - 1]}`;
+/** "Windows" → "a Windows", "Android" → "an Android" — article agrees with the noun that follows, not hardcoded. */
+const an = (noun: string) => `${/^[aeiou]/i.test(noun) ? "an" : "a"} ${noun}`;
 
 const displayName = (type: "language" | "region", code: string): string => {
   try {
@@ -101,8 +103,8 @@ const machine: Rule = (get, f) => {
     const model = str(get, "Environment/Model");
     const value =
       os === "iOS" ? "an iPhone or iPad; Safari names no model"
-      : model ? `an ${os} phone or tablet, model ${model}`
-      : `an ${os} phone or tablet; the model is withheld`;
+      : model ? an(`${os} phone or tablet, model ${model}`)
+      : an(`${os} phone or tablet; the model is withheld`);
     return { name: "Machine", value, evidence: ["Environment/Mobile", "Environment/Model", "Environment/OS"] };
   }
   if (os === "macOS" && touch > 0) {
@@ -224,7 +226,7 @@ const languages: Rule = (get) => {
   const region = first.split("-")[1];
   const country = str(get, "Server/Country");
   if (region && country && region.toUpperCase() !== country.toUpperCase()) {
-    value += ` — ${/^[aeiou]/i.test(displayName("language", base(first))) ? "an" : "a"} ${displayName("language", base(first))} UI in ${displayName("region", country)}`;
+    value += ` — ${an(`${displayName("language", base(first))} UI`)} in ${displayName("region", country)}`;
     ev.push("Server/Country");
   }
   return { name: "Languages", value, evidence: ev };

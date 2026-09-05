@@ -74,6 +74,10 @@ assert.match(find(win, "Display"), /scaled at 150%/);
 const android = mk({ "Environment/OS": "Android", "Environment/Mobile": true, "Environment/Model": "SM-S928B", "Environment/Form factors": ["Mobile"] });
 assert.match(find(android, "Machine"), /Android phone or tablet, model SM-S928B/);
 
+// Windows tablet: article agrees with the OS name, not a hardcoded "an".
+const winTablet = mk({ "Environment/OS": "Windows", "Environment/Form factors": ["Tablet"] });
+assert.match(find(winTablet, "Machine"), /a Windows phone or tablet/);
+
 // Software renderer means no real GPU in sight.
 const vm = mk({ "Environment/OS": "Linux", "WebGL/Unmasked renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)" });
 assert.match(find(vm, "Machine"), /software rendering/);
