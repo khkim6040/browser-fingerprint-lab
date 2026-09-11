@@ -13,6 +13,24 @@ test whether it can recognise you again after a reload, a restart, incognito,
 or another browser. Every section header counts how many of its signals this
 browser exposes.
 
+## Why this exists
+
+This started with an Ars Technica story: [AliExpress was caught fingerprinting
+visitors by playing inaudible sounds through their browsers](https://arstechnica.com/security/2026/08/aliexpress-caught-fingerprinting-visitors-after-sending-inaudible-sounds-to-browsers/).
+No microphone was involved. The page asked the Web Audio API to render a tone
+it never played, then read the samples back with `getChannelData()` — and the
+tiny rounding differences between browsers, operating systems and CPUs were
+the identifier.
+
+That raised the question this project is really about: if a page can learn
+that much from an audio graph it merely computed, what else can it learn with
+no permission prompt at all? Audio turned out to be one signal among many —
+CPU, memory, GPU, display, canvas, codecs, network — and the interesting part
+was not generating a fingerprint but mapping the boundary: which values the
+browser hands over as-is, which it deliberately blurs, which can be inferred by
+measurement, and which stay out of reach. This page is that map, run live on
+your own machine.
+
 ## Principles
 
 - **Nothing you collected leaves the browser.** No analytics, no cookie, no
@@ -50,7 +68,7 @@ surface, which is why no user-agent string parsing is used to paper over gaps.
 | WebGL | Vendor and renderer, the unmasked GPU string via `WEBGL_debug_renderer_info`, driver limits, shader precision, extension list |
 | WebGPU | Adapter vendor and architecture, supported features, key limits |
 | Rendering | SHA-256 of a Canvas 2D drawing (Latin and Hangul text, emoji, gradient, shadow, blend mode, curve) and of a WebGL shader render, each drawn twice so per-load noise (Firefox `resistFingerprinting`, Safari) shows up as `unstable` |
-| Audio | `AudioContext` sample rate, base/output latency and state (read, never started), plus SHA-256 of a 10 kHz tone rendered through a compressor in `OfflineAudioContext` — no microphone, no sound |
+| Audio | `AudioContext` sample rate, base/output latency and state (read, never started), plus SHA-256 of a 10 kHz tone rendered through a compressor in `OfflineAudioContext` — no microphone, no sound. The same trick as the AliExpress story above |
 | Media | `MediaCapabilities.decodingInfo()` for H.264 / H.265 / VP9 / AV1 at 4K60 and AAC / Opus: supported, smooth, power-efficient (a hardware-decoder hint) |
 | Network | `navigator.connection` (Chromium, rounded and noised), DNS / TCP / TLS / TTFB / download timings of this page's own load, and a throughput guess from its biggest resource — nothing extra is fetched |
 | Server | What the request told the server before any script ran: IP address, country, region, city, coordinates and timezone from Vercel's geolocation headers, plus the edge region that answered. Echoed, never stored |
